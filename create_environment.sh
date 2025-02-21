@@ -38,7 +38,7 @@ check_submissions $submissions_file
 EOF
 
 #for modules
-touch $userdir/modules/ functions.sh
+touch $userdir/modules/functions.sh
 cat <<'EOF' > $userdir/modules/functions.sh
 #!/bin/bash
 
@@ -85,3 +85,20 @@ cat <<'EOF' >  $userdir/config/config.env
 ASSIGNMENT="Shell Navigation"
 DAYS_REMAINING=2
 EOF
+#Execute permissions to the above created files.
+chmod u+x $userdir/config/config.env
+chmod u+x $userdir/modules/functions.sh
+chmod u+x $userdir/assets/submissions.txt
+
+#Creation of startup.sh
+cat <<EOF > $userdir/startup.sh
+#!/bin/bash
+cd $userdir
+bash app/reminder.sh
+EOF
+
+# execute permission for startup.sh
+chmod u+x $userdir/startup.sh
+
+# Execute startup.sh which will execute reminder.sh
+./$userdir/startup.sh
